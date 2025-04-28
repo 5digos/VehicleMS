@@ -1,4 +1,12 @@
+using Application.Dtos.Request;
+using Application.Interfaces.IQuery;
+using Application.Interfaces.IServices.IVehicleServices;
+using Application.Interfaces.IValidators;
+using Application.UseCase.VehicleServices;
+using Application.Validators;
+using FluentValidation;
 using Infrastructure.Persistence;
+using Infrastructure.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -16,7 +24,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Template", Version = "1.0" });
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "VehicleMS", Version = "1.0" });
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
@@ -28,8 +36,19 @@ var connectionString = builder.Configuration["ConnectionString"];
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
+//Services
+builder.Services.AddScoped<IVehicleGetServices, VehicleGetServices>();
 
-//CORS
+
+//Validators
+builder.Services.AddValidatorsFromAssemblyContaining<GetVehiclesRequestValidator>();
+builder.Services.AddScoped<IValidatorHandler<GetVehiclesRequest>, ValidatorHandler<GetVehiclesRequest>>();
+
+//CQRS
+builder.Services.AddScoped<IVehicleQuery, VehicleQuery>();
+
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", builder =>

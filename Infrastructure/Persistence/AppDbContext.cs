@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Infrastructure.Persistence.Seeds;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -120,6 +121,18 @@ namespace Infrastructure.Persistence
                     .IsRequired()
                     .HasColumnType("decimal(9,6)");
 
+                entity.Property(bo => bo.City)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(bo => bo.PostalCode)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
+                entity.Property(bo => bo.Province)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
                 entity.Property(bo => bo.LocationReference)
                     .IsRequired()
                     .HasMaxLength(255);
@@ -190,6 +203,10 @@ namespace Infrastructure.Persistence
                     .IsRequired()
                     .HasColumnType("datetime");
             });
+
+
+            // Cargar datos predeterminados
+            VehicleStatusSeed.Seed(modelBuilder);
 
         }
     }

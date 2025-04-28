@@ -23,6 +23,9 @@ namespace Infrastructure.Migrations
                     Hours = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Latitude = table.Column<decimal>(type: "decimal(9,6)", nullable: false),
                     Longitude = table.Column<decimal>(type: "decimal(9,6)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Province = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LocationReference = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
