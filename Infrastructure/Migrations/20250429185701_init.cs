@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -11,28 +13,6 @@ namespace Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "BranchOffices",
-                columns: table => new
-                {
-                    BranchOfficeId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    Hours = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Latitude = table.Column<decimal>(type: "decimal(9,6)", nullable: false),
-                    Longitude = table.Column<decimal>(type: "decimal(9,6)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Province = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    LocationReference = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BranchOffices", x => x.BranchOfficeId);
-                });
-
             migrationBuilder.CreateTable(
                 name: "TransmissionTypes",
                 columns: table => new
@@ -71,6 +51,48 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VehicleStatus", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Zones",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Zones", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BranchOffices",
+                columns: table => new
+                {
+                    BranchOfficeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    Hours = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Latitude = table.Column<decimal>(type: "decimal(9,6)", nullable: false),
+                    Longitude = table.Column<decimal>(type: "decimal(9,6)", nullable: false),
+                    BranchOfficeZoneId = table.Column<int>(type: "int", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Province = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LocationReference = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BranchOffices", x => x.BranchOfficeId);
+                    table.ForeignKey(
+                        name: "FK_BranchOffices_Zones_BranchOfficeZoneId",
+                        column: x => x.BranchOfficeZoneId,
+                        principalTable: "Zones",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -162,6 +184,55 @@ namespace Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "TransmissionTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Manual" },
+                    { 2, "Automático" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "VehicleCategories",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Vehículo de tamaño mediano, ideal para uso familiar o personal, con un diseño cerrado y cómodo.", "Sedán" },
+                    { 2, "Vehículo utilitario deportivo, con mayor espacio y capacidad para terrenos difíciles.", "SUV" },
+                    { 3, "Vehículo compacto con una puerta trasera que da acceso al baúl, ideal para la ciudad.", "Hatchback" },
+                    { 4, "Vehículo con una cabina y una zona de carga abierta, ideal para transporte de mercancías.", "Pickup" },
+                    { 5, "Vehículo diseñado para altas prestaciones, con un diseño aerodinámico y potente.", "Deportivo" },
+                    { 6, "Vehículo de dos puertas con un diseño elegante y deportivo, ideal para uso personal.", "Coupé" },
+                    { 7, "Ideal para familias grandes o grupos.", "Minivan" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "VehicleStatus",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Disponible" },
+                    { 2, "Ocupado" },
+                    { 3, "En Mantenimiento" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Zones",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Zona Norte" },
+                    { 2, "Zona Sur" },
+                    { 3, "Zona Este" },
+                    { 4, "Zona Oeste" }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BranchOffices_BranchOfficeZoneId",
+                table: "BranchOffices",
+                column: "BranchOfficeZoneId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_VehicleDocuments_VehicleId",
                 table: "VehicleDocuments",
@@ -216,6 +287,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "VehicleStatus");
+
+            migrationBuilder.DropTable(
+                name: "Zones");
         }
     }
 }

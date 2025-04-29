@@ -13,7 +13,8 @@ namespace Infrastructure.Persistence
     {
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleStatus> VehicleStatus { get; set; }
-        public DbSet<BranchOffice> BranchOffices { get; set; }        
+        public DbSet<BranchOffice> BranchOffices { get; set; }
+        public DbSet<BranchOfficeZone> Zones { get; set; }
         public DbSet<VehicleCategory> VehicleCategories { get; set; }
         public DbSet<TransmissionType> TransmissionTypes { get; set; }
         public DbSet<VehicleReview> VehicleReviews { get; set; }
@@ -136,6 +137,11 @@ namespace Infrastructure.Persistence
                 entity.Property(bo => bo.LocationReference)
                     .IsRequired()
                     .HasMaxLength(255);
+
+                entity.HasOne(bo => bo.Zone)
+                    .WithMany(z => z.BranchOffices)
+                    .HasForeignKey(bo => bo.BranchOfficeZoneId)
+                    .OnDelete(DeleteBehavior.Restrict); 
             });
 
             modelBuilder.Entity<VehicleCategory>(entity =>
@@ -209,6 +215,7 @@ namespace Infrastructure.Persistence
             VehicleStatusSeed.Seed(modelBuilder);
             TransmissionTypeSeed.Seed(modelBuilder);
             VehicleCategorySeed.Seed(modelBuilder);
+            BranchOfficeZoneSeed.Seed(modelBuilder);
 
         }
     }

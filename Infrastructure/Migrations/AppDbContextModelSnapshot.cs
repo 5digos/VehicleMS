@@ -35,6 +35,9 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<int>("BranchOfficeZoneId")
+                        .HasColumnType("int");
+
                     b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -78,7 +81,48 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("BranchOfficeId");
 
+                    b.HasIndex("BranchOfficeZoneId");
+
                     b.ToTable("BranchOffices", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.BranchOfficeZone", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Zones");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Zona Norte"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Zona Sur"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Zona Este"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Zona Oeste"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.TransmissionType", b =>
@@ -97,6 +141,18 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TransmissionTypes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Manual"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Automático"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Vehicle", b =>
@@ -180,6 +236,50 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("VehicleCategories", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Vehículo de tamaño mediano, ideal para uso familiar o personal, con un diseño cerrado y cómodo.",
+                            Name = "Sedán"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Vehículo utilitario deportivo, con mayor espacio y capacidad para terrenos difíciles.",
+                            Name = "SUV"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Vehículo compacto con una puerta trasera que da acceso al baúl, ideal para la ciudad.",
+                            Name = "Hatchback"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Vehículo con una cabina y una zona de carga abierta, ideal para transporte de mercancías.",
+                            Name = "Pickup"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Vehículo diseñado para altas prestaciones, con un diseño aerodinámico y potente.",
+                            Name = "Deportivo"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Vehículo de dos puertas con un diseño elegante y deportivo, ideal para uso personal.",
+                            Name = "Coupé"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Ideal para familias grandes o grupos.",
+                            Name = "Minivan"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.VehicleDocument", b =>
@@ -256,6 +356,34 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("VehicleStatus", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Disponible"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Ocupado"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "En Mantenimiento"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.BranchOffice", b =>
+                {
+                    b.HasOne("Domain.Entities.BranchOfficeZone", "Zone")
+                        .WithMany("BranchOffices")
+                        .HasForeignKey("BranchOfficeZoneId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Zone");
                 });
 
             modelBuilder.Entity("Domain.Entities.Vehicle", b =>
@@ -318,6 +446,11 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.BranchOffice", b =>
                 {
                     b.Navigation("Vehicles");
+                });
+
+            modelBuilder.Entity("Domain.Entities.BranchOfficeZone", b =>
+                {
+                    b.Navigation("BranchOffices");
                 });
 
             modelBuilder.Entity("Domain.Entities.TransmissionType", b =>
