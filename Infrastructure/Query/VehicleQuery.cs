@@ -19,6 +19,7 @@ namespace Infrastructure.Query
             _context = context;
         }
 
+        
         public async Task<(IEnumerable<Vehicle> Vehicles, int TotalCount)> GetVehicles(
             int? branchOffice, 
             int? category, 
@@ -75,6 +76,20 @@ namespace Infrastructure.Query
             var vehicles = await query.ToListAsync();
 
             return (vehicles, totalCount);
+        }
+
+        public async Task<Vehicle> GetVehicleById(Guid id)
+        {
+            var vehicle = await _context.Set<Vehicle>()
+                .Include(v => v.VehicleStatus)
+                .Include(v => v.BranchOffice)
+                .Include(v => v.Category)
+                .Include(v => v.TransmissionType)
+                .Include(v => v.Reviews)
+                .Include(v => v.Documents)
+                .FirstOrDefaultAsync(v => v.VehicleId == id);
+
+            return vehicle;
         }
     }
 }

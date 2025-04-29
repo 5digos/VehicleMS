@@ -10,5 +10,6 @@ namespace Application.Interfaces.IServices.IVehicleServices
     public interface IVehicleGetServices
     {
         Task<GetVehiclesResponse> GetVehicles(int? branchOffice, int? category, int? seatingCapacity, int? transmissionType, int? maxPrice, int? offset, int? size);
+        Task<VehicleDetailsResponse> GetVehicleById(Guid id);
     }
 }

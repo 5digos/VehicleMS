@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.Request;
 using Application.Dtos.Response;
+using Application.Exceptions;
 using Application.Interfaces.IQuery;
 using Application.Interfaces.IServices.IVehicleServices;
 using Application.Interfaces.IValidators;
@@ -21,7 +22,7 @@ namespace Application.UseCase.VehicleServices
             _validator = validator;
             _vehicleQuery = vehicleQuery;
         }
-       
+        
 
         public async Task<GetVehiclesResponse> GetVehicles(int? branchOffice, int? category, int? seatingCapacity, int? transmissionType, int? maxPrice, int? offset, int? size)
         {
@@ -51,6 +52,25 @@ namespace Application.UseCase.VehicleServices
                 Vehicles = responseVehicles,
                 TotalCount = totalCount
             };
+        }
+
+        public async Task<VehicleDetailsResponse> GetVehicleById(Guid id)
+        {
+            try
+            { 
+                var vehicle = await _vehicleQuery.GetVehicleById(id);
+
+                if (vehicle == null)
+                {
+                    throw new NotFoundException("Vehicle not found");
+                }
+
+                return (VehicleDetailsResponse)vehicle;
+            }
+            catch (NotFoundException ex)
+            {
+                throw new NotFoundException(ex.Message);
+            }
         }
     }
 }

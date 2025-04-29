@@ -57,5 +57,28 @@ namespace VehicleMS.Controllers
                 return BadRequest(ex.Errors);
             }
         }
+
+
+        /// <summary>
+        /// Retrieves detailed information about a specific vehicle by its ID.
+        /// </summary>
+        /// <param name="id">The unique identifier of the vehicle.</param>
+        /// <response code="200">Success</response>
+        /// <returns>The project details.</returns>
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(VehicleDetailsResponse), 200)]
+        [ProducesResponseType(typeof(ApiError), 404)]
+        public async Task<IActionResult> GetProjectById([FromRoute] Guid id)
+        {
+            try
+            {
+                var result = await _vehicleGetService.GetVehicleById(id);
+                return new JsonResult(result) { StatusCode = 200 };
+            }
+            catch (NotFoundException ex)
+            {
+                return new JsonResult(new ApiError { Message = ex.Message }) { StatusCode = 404 };
+            }
+        }
     }
 }

@@ -207,6 +207,8 @@ namespace Infrastructure.Persistence
 
             // Cargar datos predeterminados
             VehicleStatusSeed.Seed(modelBuilder);
+            TransmissionTypeSeed.Seed(modelBuilder);
+            VehicleCategorySeed.Seed(modelBuilder);
 
         }
     }

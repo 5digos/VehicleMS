@@ -1,8 +1,14 @@
 using Application.Dtos.Request;
 using Application.Interfaces.IQuery;
+using Application.Interfaces.IServices.ITransmissionTypeServices;
+using Application.Interfaces.IServices.IVehicleCategoryServices;
 using Application.Interfaces.IServices.IVehicleServices;
+using Application.Interfaces.IServices.IVehicleStatusServices;
 using Application.Interfaces.IValidators;
+using Application.UseCase.TransmissionTypeServices;
+using Application.UseCase.VehicleCategoryServices;
 using Application.UseCase.VehicleServices;
+using Application.UseCase.VehicleStatusServices;
 using Application.Validators;
 using FluentValidation;
 using Infrastructure.Persistence;
@@ -38,6 +44,9 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 
 //Services
 builder.Services.AddScoped<IVehicleGetServices, VehicleGetServices>();
+builder.Services.AddScoped<IVehicleStatusGetServices, VehicleStatusGetServices>();
+builder.Services.AddScoped<ITransmissionTypeGetServices, TransmissionTypeGetServices>();
+builder.Services.AddScoped<IVehicleCategoryGetServices, VehicleCategoryGetServices>();
 
 
 //Validators
@@ -46,6 +55,9 @@ builder.Services.AddScoped<IValidatorHandler<GetVehiclesRequest>, ValidatorHandl
 
 //CQRS
 builder.Services.AddScoped<IVehicleQuery, VehicleQuery>();
+builder.Services.AddScoped<IVehicleStatusQuery, VehicleStatusQuery>();
+builder.Services.AddScoped<ITransmissionTypeQuery, TransmissionTypeQuery>();
+builder.Services.AddScoped<IVehicleCategoryQuery, VehicleCategoryQuery>();
 
 
 
