@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250429185701_init")]
+    [Migration("20250501012231_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -321,7 +321,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Comment")
-                        .IsRequired()
                         .HasColumnType("varchar(max)");
 
                     b.Property<DateTime>("CreatedAt")

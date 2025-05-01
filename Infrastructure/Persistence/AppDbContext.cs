@@ -181,7 +181,7 @@ namespace Infrastructure.Persistence
 
                 entity.Property(vr => vr.Comment)
                     .HasColumnType("varchar(max)")                    
-                    .IsRequired();
+                    .IsRequired(false);
 
                 entity.Property(vr => vr.Rating)
                     .IsRequired();

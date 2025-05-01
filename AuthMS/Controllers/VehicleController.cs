@@ -4,6 +4,8 @@ using Application.Dtos.Response;
 using Application.Interfaces.IServices.IVehicleServices;
 using FluentValidation;
 using Application.Exceptions;
+using Domain.Entities;
+using Application.Dtos.Request;
 
 namespace VehicleMS.Controllers
 {
@@ -12,10 +14,12 @@ namespace VehicleMS.Controllers
     public class VehicleController : ControllerBase
     {
         private readonly IVehicleGetServices _vehicleGetService;
+        private readonly IVehiclePatchServices _vehiclePatchService;
 
-        public VehicleController(IVehicleGetServices vehicleGetService)
+        public VehicleController(IVehicleGetServices vehicleGetService, IVehiclePatchServices vehiclePatchService)
         {
             _vehicleGetService = vehicleGetService;
+            _vehiclePatchService = vehiclePatchService;
         }
 
         /// <summary>
@@ -78,6 +82,30 @@ namespace VehicleMS.Controllers
             catch (NotFoundException ex)
             {
                 return new JsonResult(new ApiError { Message = ex.Message }) { StatusCode = 404 };
+            }
+        }
+
+
+        /// <summary>
+        /// Add a new review to an existing vehicle.
+        /// </summary>
+        /// <param name="id">The unique identifier of the vehicle.</param>
+        /// /// <param name="reviewRequest">The details of the review to be added.</param>
+        /// <response code="200">Success</response>
+        /// <returns>The project details.</returns>
+        [HttpPatch("{id}/reviews")]
+        [ProducesResponseType(typeof(VehicleReviewResponse), 200)]
+        [ProducesResponseType(typeof(ApiError), 400)]
+        public async Task<IActionResult> AddReview([FromRoute] Guid id, [FromBody] VehicleReviewRequest reviewRequest)
+        {
+            try
+            {
+                var result = await _vehiclePatchService.AddReview(id, reviewRequest);
+                return new JsonResult(result) { StatusCode = 200 };
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Errors);
             }
         }
     }

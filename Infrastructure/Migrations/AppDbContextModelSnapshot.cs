@@ -318,7 +318,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Comment")
-                        .IsRequired()
                         .HasColumnType("varchar(max)");
 
                     b.Property<DateTime>("CreatedAt")

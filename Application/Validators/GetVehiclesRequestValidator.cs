@@ -12,7 +12,15 @@ namespace Application.Validators
     {
         public GetVehiclesRequestValidator()
         {
-            
+            RuleFor(x => x.Offset)
+                .GreaterThanOrEqualTo(0)
+                .When(x => x.Offset.HasValue)
+                .WithMessage("El valor 'offset' debe ser un numero entero no negativo.");
+
+            RuleFor(x => x.Size)
+                .GreaterThanOrEqualTo(0)
+                .When(x => x.Size.HasValue)
+                .WithMessage("El valor 'size' debe ser un numero entero no negativo.");
         }
     }
 }
