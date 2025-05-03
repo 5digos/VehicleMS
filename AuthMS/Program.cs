@@ -1,4 +1,4 @@
-using Application.Dtos.Request;
+﻿using Application.Dtos.Request;
 using Application.Interfaces.ICommand;
 using Application.Interfaces.IQuery;
 using Application.Interfaces.IServices.IBranchOfficeZoneServices;
@@ -17,7 +17,9 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Infrastructure.Command;
 using Infrastructure.Persistence;
+using Infrastructure.Persistence.Seeds;
 using Infrastructure.Query;
+using Infrastructure.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -46,6 +48,9 @@ builder.Services.AddSwaggerGen(options =>
 var connectionString = builder.Configuration["ConnectionString"];
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddSingleton<PatenteGenerator>(_ =>
+    new PatenteGenerator("AA000AA"));
 
 //Services
 builder.Services.AddScoped<IVehicleGetServices, VehicleGetServices>();
@@ -85,12 +90,24 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 
+// ─── Siembra de datos al arrancar ──────────────────────────────────────────
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<AppDbContext>();
+    var gen = services.GetRequiredService<PatenteGenerator>();
+
+    // Aplica migraciones pendientes y luego siembra vehículos
+    await VehicleSeeder.SeedAsync(context, gen);
+}
+
+
 app.Use(async (context, next) =>
 {
-    // Contin�a con la solicitud
+    // Continúa con la solicitud
     await next();
 
-    // Si el estado de la respuesta es 401 (No autorizado), a�ade los encabezados CORS
+    // Si el estado de la respuesta es 401 (No autorizado), añade los encabezados CORS
     if (context.Response.StatusCode == 401)
     {
         context.Response.Headers.Add("Access-Control-Allow-Origin", "*");

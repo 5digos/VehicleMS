@@ -26,7 +26,9 @@ namespace Infrastructure.Persistence
             modelBuilder.Entity<Vehicle>(entity =>
             {
                 entity.ToTable("Vehicles");
-                entity.HasKey(v => v.VehicleId);                
+                entity.HasKey(v => v.VehicleId);
+                entity.Property(v => v.VehicleId)
+                    .ValueGeneratedOnAdd();
 
                 entity.HasOne(v => v.VehicleStatus)
                     .WithMany(vs => vs.Vehicles)
@@ -216,6 +218,7 @@ namespace Infrastructure.Persistence
             TransmissionTypeSeed.Seed(modelBuilder);
             VehicleCategorySeed.Seed(modelBuilder);
             BranchOfficeZoneSeed.Seed(modelBuilder);
+            BranchOfficeSeed.Seed(modelBuilder);            
 
         }
     }

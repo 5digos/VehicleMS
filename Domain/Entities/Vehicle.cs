@@ -18,6 +18,7 @@ namespace Domain.Entities
         public string Model { get; set; }
         public int Year { get; set; }
         public string LicensePlate { get; set; }
+        public string Color { get; set; }
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
 

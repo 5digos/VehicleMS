@@ -109,6 +109,7 @@ namespace Infrastructure.Migrations
                     Model = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
                     LicensePlate = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
                 },
@@ -225,7 +226,18 @@ namespace Infrastructure.Migrations
                     { 1, "Zona Norte" },
                     { 2, "Zona Sur" },
                     { 3, "Zona Este" },
-                    { 4, "Zona Oeste" }
+                    { 4, "Zona Oeste" },
+                    { 5, "CABA" },
+                    { 6, "Interior del País" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "BranchOffices",
+                columns: new[] { "BranchOfficeId", "Address", "BranchOfficeZoneId", "City", "Hours", "Latitude", "LocationReference", "Longitude", "Name", "Phone", "PostalCode", "Province" },
+                values: new object[,]
+                {
+                    { 1, "Av. Santa Fe 1234", 1, "Ciudad Autónoma de Buenos Aires", "08:00-20:00", -34.5883m, "Frente al Cementerio de Recoleta", -58.3926m, "Sucursal Recoleta", "011-4822-3344", "C1123ABC", "Ciudad Autónoma de Buenos Aires" },
+                    { 2, "Av. Vélez Sársfield 750", 2, "Córdoba", "09:00-19:00", -31.4110m, "A media cuadra de la Plaza San Martín", -64.1836m, "Sucursal Nueva Córdoba", "0351-422-5566", "X5000XYZ", "Córdoba" }
                 });
 
             migrationBuilder.CreateIndex(

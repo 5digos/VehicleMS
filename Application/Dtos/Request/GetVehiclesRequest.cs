@@ -12,6 +12,7 @@ namespace Application.Dtos.Request
         public int? Category { get; set; }
         public int? SeatingCapacity { get; set; }
         public int? TransmissionType { get; set; }
+        public string? Color { get; set; }
         public int? MaxPrice { get; set; }       
         public int? Offset { get; set; }
         public int? Size { get; set; }

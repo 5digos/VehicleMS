@@ -84,6 +84,38 @@ namespace Infrastructure.Migrations
                     b.HasIndex("BranchOfficeZoneId");
 
                     b.ToTable("BranchOffices", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            BranchOfficeId = 1,
+                            Address = "Av. Santa Fe 1234",
+                            BranchOfficeZoneId = 1,
+                            City = "Ciudad Autónoma de Buenos Aires",
+                            Hours = "08:00-20:00",
+                            Latitude = -34.5883m,
+                            LocationReference = "Frente al Cementerio de Recoleta",
+                            Longitude = -58.3926m,
+                            Name = "Sucursal Recoleta",
+                            Phone = "011-4822-3344",
+                            PostalCode = "C1123ABC",
+                            Province = "Ciudad Autónoma de Buenos Aires"
+                        },
+                        new
+                        {
+                            BranchOfficeId = 2,
+                            Address = "Av. Vélez Sársfield 750",
+                            BranchOfficeZoneId = 2,
+                            City = "Córdoba",
+                            Hours = "09:00-19:00",
+                            Latitude = -31.4110m,
+                            LocationReference = "A media cuadra de la Plaza San Martín",
+                            Longitude = -64.1836m,
+                            Name = "Sucursal Nueva Córdoba",
+                            Phone = "0351-422-5566",
+                            PostalCode = "X5000XYZ",
+                            Province = "Córdoba"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.BranchOfficeZone", b =>
@@ -122,6 +154,16 @@ namespace Infrastructure.Migrations
                         {
                             Id = 4,
                             Name = "Zona Oeste"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "CABA"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Interior del País"
                         });
                 });
 
@@ -171,6 +213,10 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
