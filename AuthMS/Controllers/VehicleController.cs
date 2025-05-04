@@ -41,6 +41,8 @@ namespace VehicleMS.Controllers
             [FromQuery] int? category,
             [FromQuery] int? seatingCapacity,
             [FromQuery] int? transmissionType,
+            [FromQuery] string? color,
+            [FromQuery] string? brand,
             [FromQuery] int? maxPrice,            
             [FromQuery] int? offset,
             [FromQuery] int? size)
@@ -48,7 +50,7 @@ namespace VehicleMS.Controllers
 
             try
             {
-                var result = await _vehicleGetService.GetVehicles(branchOffice, category, seatingCapacity, transmissionType, maxPrice, offset, size);
+                var result = await _vehicleGetService.GetVehicles(branchOffice, category, seatingCapacity, transmissionType, color, brand, maxPrice, offset, size);
 
                 Response.Headers.Add("offset", (offset ?? 0).ToString());
                 Response.Headers.Add("size", (size ?? 0).ToString());

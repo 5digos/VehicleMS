@@ -16,6 +16,7 @@ namespace Application.Dtos.Response
         public string LicensePlate { get; set; }
         public decimal Price { get; set; }
         public int SeatingCapacity { get; set; }
+        public string Color { get; set; }
         public string ImageUrl { get; set; }
         public GenericResponse Status { get; set; } 
         public GenericResponse TransmissionType { get; set; }
@@ -35,6 +36,7 @@ namespace Application.Dtos.Response
                 LicensePlate = vehicle.LicensePlate,
                 Price = vehicle.Price,
                 SeatingCapacity = vehicle.SeatingCapacity,
+                Color = vehicle.Color,
                 ImageUrl = vehicle.ImageUrl,
                 Status = (GenericResponse)vehicle.VehicleStatus,
                 TransmissionType = (GenericResponse)vehicle.TransmissionType,

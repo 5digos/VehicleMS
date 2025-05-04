@@ -25,6 +25,8 @@ namespace Infrastructure.Query
             int? category, 
             int? seatingCapacity, 
             int? transmissionType, 
+            string? color,
+            string? brand,
             int? maxPrice,             
             int? offset, 
             int? size)
@@ -54,6 +56,16 @@ namespace Infrastructure.Query
             if (transmissionType.HasValue) 
             {
                 query = query.Where(v => v.TransmissionTypeId == transmissionType.Value);
+            }
+
+            if (!string.IsNullOrEmpty(color))
+            {
+                query = query.Where(v => v.Color.ToLower().Contains(color.ToLower()));
+            }
+
+            if (!string.IsNullOrEmpty(brand))
+            {
+                query = query.Where(v => v.Brand.ToLower().Contains(brand.ToLower()));
             }
 
             if (maxPrice.HasValue)

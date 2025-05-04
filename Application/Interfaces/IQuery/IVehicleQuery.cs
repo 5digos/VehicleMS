@@ -10,7 +10,7 @@ namespace Application.Interfaces.IQuery
 {
     public interface IVehicleQuery
     {
-        Task<(IEnumerable<Vehicle> Vehicles, int TotalCount)> GetVehicles(int? branchOffice, int? category, int? seatingCapacity, int? transmissionType, int? maxPrice, int? offset, int? size);
+        Task<(IEnumerable<Vehicle> Vehicles, int TotalCount)> GetVehicles(int? branchOffice, int? category, int? seatingCapacity, int? transmissionType, string? color, string? brand, int? maxPrice, int? offset, int? size);
         Task<Vehicle> GetVehicleById(Guid id);
     }
 }

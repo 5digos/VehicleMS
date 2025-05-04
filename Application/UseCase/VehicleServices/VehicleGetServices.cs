@@ -24,7 +24,7 @@ namespace Application.UseCase.VehicleServices
         }
         
 
-        public async Task<GetVehiclesResponse> GetVehicles(int? branchOffice, int? category, int? seatingCapacity, int? transmissionType, int? maxPrice, int? offset, int? size)
+        public async Task<GetVehiclesResponse> GetVehicles(int? branchOffice, int? category, int? seatingCapacity, int? transmissionType, string? color, string? brand, int? maxPrice, int? offset, int? size)
         {
             var request = new GetVehiclesRequest
             {
@@ -32,6 +32,8 @@ namespace Application.UseCase.VehicleServices
                 Category = category,
                 SeatingCapacity = seatingCapacity,
                 TransmissionType = transmissionType,
+                Color = color,
+                Brand = brand,
                 MaxPrice = maxPrice,                
                 Offset = offset,
                 Size = size
@@ -39,7 +41,7 @@ namespace Application.UseCase.VehicleServices
 
             await _validator.Validate(request);
 
-            var (vehicles, totalCount) = await _vehicleQuery.GetVehicles(branchOffice, category, seatingCapacity, transmissionType, maxPrice, offset, size);
+            var (vehicles, totalCount) = await _vehicleQuery.GetVehicles(branchOffice, category, seatingCapacity, transmissionType, color, brand, maxPrice, offset, size);
             var responseVehicles = new List<VehicleResponse>();
 
             foreach (var vehicle in vehicles)
