@@ -1,12 +1,14 @@
 ﻿using Application.Dtos.Request;
 using Application.Interfaces.ICommand;
 using Application.Interfaces.IQuery;
+using Application.Interfaces.IServices.IBranchOfficeServices;
 using Application.Interfaces.IServices.IBranchOfficeZoneServices;
 using Application.Interfaces.IServices.ITransmissionTypeServices;
 using Application.Interfaces.IServices.IVehicleCategoryServices;
 using Application.Interfaces.IServices.IVehicleServices;
 using Application.Interfaces.IServices.IVehicleStatusServices;
 using Application.Interfaces.IValidators;
+using Application.UseCase.BranchOfficeServices;
 using Application.UseCase.BranchOfficeZoneServices;
 using Application.UseCase.TransmissionTypeServices;
 using Application.UseCase.VehicleCategoryServices;
@@ -59,6 +61,7 @@ builder.Services.AddScoped<IVehicleStatusGetServices, VehicleStatusGetServices>(
 builder.Services.AddScoped<ITransmissionTypeGetServices, TransmissionTypeGetServices>();
 builder.Services.AddScoped<IVehicleCategoryGetServices, VehicleCategoryGetServices>();
 builder.Services.AddScoped<IBranchOfficeZoneGetServices, BranchOfficeZoneGetServices>();
+builder.Services.AddScoped<IBranchOfficeGetServices, BranchOfficeGetServices>();
 
 
 //Validators
@@ -74,6 +77,7 @@ builder.Services.AddScoped<IVehicleStatusQuery, VehicleStatusQuery>();
 builder.Services.AddScoped<ITransmissionTypeQuery, TransmissionTypeQuery>();
 builder.Services.AddScoped<IVehicleCategoryQuery, VehicleCategoryQuery>();
 builder.Services.AddScoped<IBranchOfficeZoneQuery, BranchOfficeZoneQuery>();
+builder.Services.AddScoped<IBranchOfficeQuery, BranchOfficeQuery>();
 
 
 

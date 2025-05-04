@@ -23,6 +23,11 @@ namespace Application.Dtos.Response
             return ConvertToGenericResponse(transmissionType);
         }
 
+        public static explicit operator GenericResponse(BranchOfficeZone branchOfficeZone)
+        {
+            return ConvertToGenericResponse(branchOfficeZone);
+        }        
+
         private static GenericResponse ConvertToGenericResponse<T>(T entity) where T : class
         {
             var idProperty = typeof(T).GetProperty("Id");

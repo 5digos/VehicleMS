@@ -16,6 +16,7 @@ namespace Application.Dtos.Response
         public string Hours { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
+        public GenericResponse Zone { get; set; }
         public string City { get; set; }
         public string PostalCode { get; set; }
         public string Province { get; set; }
@@ -33,6 +34,7 @@ namespace Application.Dtos.Response
                 Hours = branchOffice.Hours,
                 Latitude = branchOffice.Latitude,
                 Longitude = branchOffice.Longitude,
+                Zone = (GenericResponse)branchOffice.Zone,
                 City = branchOffice.City,
                 PostalCode = branchOffice.PostalCode,
                 Province = branchOffice.Province,
