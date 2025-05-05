@@ -34,6 +34,7 @@ namespace Infrastructure.Query
             var query = _context.Vehicles.Where(v => v.VehicleStatusId == 1) 
                 .Include(v => v.VehicleStatus)
                 .Include(v => v.BranchOffice)
+                    .ThenInclude(v => v.Zone)
                 .Include(v => v.Category)
                 .Include(v => v.TransmissionType)
                 .AsQueryable();
