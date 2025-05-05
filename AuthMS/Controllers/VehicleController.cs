@@ -74,7 +74,7 @@ namespace VehicleMS.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(VehicleDetailsResponse), 200)]
         [ProducesResponseType(typeof(ApiError), 404)]
-        public async Task<IActionResult> GetProjectById([FromRoute] Guid id)
+        public async Task<IActionResult> GetVehicleById([FromRoute] Guid id)
         {
             try
             {

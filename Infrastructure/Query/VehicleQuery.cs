@@ -95,6 +95,8 @@ namespace Infrastructure.Query
             var vehicle = await _context.Set<Vehicle>()
                 .Include(v => v.VehicleStatus)
                 .Include(v => v.BranchOffice)
+                    .ThenInclude(v => v.Zone)
+                .Include(v => v.VehicleStatus)
                 .Include(v => v.Category)
                 .Include(v => v.TransmissionType)
                 .Include(v => v.Reviews)

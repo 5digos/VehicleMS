@@ -21,7 +21,7 @@ namespace Application.Dtos.Response
             {
                 Vehicle = (VehicleResponse)vehicle,
                 Reviews = vehicle.Reviews?.Select(r => (VehicleReviewResponse)r).ToList() ?? new List<VehicleReviewResponse>(),
-                Documents = vehicle.Documents.Select(d => (VehicleDocumentResponse)d).ToList() ?? new List<VehicleDocumentResponse>()
+                Documents = vehicle.Documents?.Select(d => (VehicleDocumentResponse)d).ToList() ?? new List<VehicleDocumentResponse>()
             };
         }
     }
