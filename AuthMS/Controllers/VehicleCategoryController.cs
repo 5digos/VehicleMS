@@ -1,6 +1,7 @@
 ﻿using Application.Dtos.Response;
 using Application.Interfaces.IServices.ITransmissionTypeServices;
 using Application.Interfaces.IServices.IVehicleCategoryServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,7 @@ namespace VehicleMS.Controllers
         /// Retrieves a list of all vehicle categories.
         /// </summary>
         /// <response code="200"> Success </response>
+        [AllowAnonymous]        
         [HttpGet]
         [ProducesResponseType(typeof(List<VehicleCategoryResponse>), 200)]
         public async Task<IActionResult> GetAll()

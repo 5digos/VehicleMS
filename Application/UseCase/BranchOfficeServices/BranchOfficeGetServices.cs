@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.Response;
+using Application.Exceptions;
 using Application.Interfaces.IQuery;
 using Application.Interfaces.IServices.IBranchOfficeServices;
 using System;
@@ -16,6 +17,25 @@ namespace Application.UseCase.BranchOfficeServices
         public BranchOfficeGetServices(IBranchOfficeQuery branchOfficeQuery)
         {
             _branchOfficeQuery = branchOfficeQuery;
+        }
+
+        public async Task<BranchOfficeResponse> GetBranchOfficeById(int id)
+        {
+            try
+            {
+                var branchOffice = await _branchOfficeQuery.GetBranchOfficeById(id);
+
+                if (branchOffice == null)
+                {
+                    throw new NotFoundException("branchOffice not found");
+                }
+
+                return (BranchOfficeResponse)branchOffice;
+            }
+            catch (NotFoundException ex)
+            {
+                throw new NotFoundException(ex.Message);
+            }
         }
 
         public async Task<List<BranchOfficeResponse>> GetBranchOffices(string? name, int? zone, string? city, string? postalCode, string? province)

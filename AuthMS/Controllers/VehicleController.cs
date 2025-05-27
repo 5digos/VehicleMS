@@ -6,6 +6,7 @@ using FluentValidation;
 using Application.Exceptions;
 using Domain.Entities;
 using Application.Dtos.Request;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VehicleMS.Controllers
 {
@@ -33,6 +34,7 @@ namespace VehicleMS.Controllers
         /// <param name="offset">Optional. Skip the specified number of records (used for pagination).</param>
         /// <param name="size">Optional. Limit the number of records returned (used for pagination).</param>
         /// <response code="200">Success</response>
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(typeof(List<VehicleResponse>), 200)]
         [ProducesResponseType(typeof(ApiError), 400)]
@@ -43,7 +45,7 @@ namespace VehicleMS.Controllers
             [FromQuery] int? transmissionType,
             [FromQuery] string? color,
             [FromQuery] string? brand,
-            [FromQuery] int? maxPrice,            
+            [FromQuery] int? maxPrice,
             [FromQuery] int? offset,
             [FromQuery] int? size)
         {
@@ -69,8 +71,8 @@ namespace VehicleMS.Controllers
         /// Retrieves detailed information about a specific vehicle by its ID.
         /// </summary>
         /// <param name="id">The unique identifier of the vehicle.</param>
-        /// <response code="200">Success</response>
-        /// <returns>The project details.</returns>
+        /// <response code="200">Success</response>        
+        [AllowAnonymous]
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(VehicleDetailsResponse), 200)]
         [ProducesResponseType(typeof(ApiError), 404)]
@@ -95,6 +97,7 @@ namespace VehicleMS.Controllers
         /// /// <param name="reviewRequest">The details of the review to be added.</param>
         /// <response code="200">Success</response>
         /// <returns>The project details.</returns>
+        [Authorize(Policy = "ActiveUser")]
         [HttpPatch("{id}/reviews")]
         [ProducesResponseType(typeof(VehicleReviewResponse), 200)]
         [ProducesResponseType(typeof(ApiError), 400)]
@@ -108,6 +111,26 @@ namespace VehicleMS.Controllers
             catch (ValidationException ex)
             {
                 return BadRequest(ex.Errors);
+            }
+        }
+
+        /// <summary>
+        /// Actualiza la sucursal asociada a un vehículo (tras devolución).
+        /// </summary>
+        [HttpPatch("{id}/branchOffice")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> UpdateBranchOffice([FromRoute] Guid id, [FromQuery] int branchOfficeId)
+        {         
+
+            try
+            {
+                await _vehiclePatchService.UpdateBranchOffice(id, branchOfficeId);
+                return NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return new JsonResult(new ApiError { Message = ex.Message }) { StatusCode = 404 };
             }
         }
     }

@@ -10,5 +10,6 @@ namespace Application.Interfaces.ICommand
     public interface IVehicleCommand
     {
         Task AddVehicleReview(Vehicle vehicle, VehicleReview review);
+        Task UpdateBranchOffice(Vehicle vehicle);
     }
 }

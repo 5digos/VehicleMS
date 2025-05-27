@@ -10,5 +10,6 @@ namespace Application.Interfaces.IQuery
     public interface IBranchOfficeQuery
     {
         Task<IEnumerable<BranchOffice>> GetBranchOffices(string? name, int? zone, string? city, string? postalCode, string? province);
+        Task<BranchOffice> GetBranchOfficeById(int id);
     }
 }

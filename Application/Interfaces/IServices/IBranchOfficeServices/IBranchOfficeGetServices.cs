@@ -10,5 +10,6 @@ namespace Application.Interfaces.IServices.IBranchOfficeServices
     public interface IBranchOfficeGetServices
     {
         Task<List<BranchOfficeResponse>> GetBranchOffices(string? name, int? zone, string? city, string? postalCode, string? province);
+        Task<BranchOfficeResponse> GetBranchOfficeById(int id);
     }
 }

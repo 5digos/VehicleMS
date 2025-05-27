@@ -12,5 +12,6 @@ namespace Application.Interfaces.IServices.IVehicleServices
     public interface IVehiclePatchServices
     {
         Task<VehicleReviewResponse> AddReview(Guid vehicleId, VehicleReviewRequest reviewRequest);
+        Task UpdateBranchOffice(Guid vehicleId, int branchOfficeId);
     }
 }

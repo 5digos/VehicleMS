@@ -2,6 +2,7 @@
 using Application.Interfaces.IServices.ITransmissionTypeServices;
 using Application.Interfaces.IServices.IVehicleStatusServices;
 using Application.UseCase.VehicleStatusServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +24,7 @@ namespace VehicleMS.Controllers
         /// Retrieves a list of all transmission types.
         /// </summary>
         /// <response code="200"> Success </response>
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(typeof(List<GenericResponse>), 200)]
         public async Task<IActionResult> GetAll()

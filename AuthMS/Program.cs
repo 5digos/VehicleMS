@@ -22,9 +22,12 @@ using Infrastructure.Persistence;
 using Infrastructure.Persistence.Seeds;
 using Infrastructure.Query;
 using Infrastructure.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,6 +83,37 @@ builder.Services.AddScoped<IBranchOfficeZoneQuery, BranchOfficeZoneQuery>();
 builder.Services.AddScoped<IBranchOfficeQuery, BranchOfficeQuery>();
 
 
+//TokenConfiguration
+var jwtKey = builder.Configuration["JwtSettings:key"];
+
+if (string.IsNullOrEmpty(jwtKey))
+{
+    throw new Exception("No se encontró 'JwtSettings:key'. Configúralo en User Secrets o Variables de Entorno.");
+}
+
+builder.Services.AddAuthentication(config =>
+{
+    config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(config =>
+{
+    config.RequireHttpsMetadata = false;
+    config.SaveToken = true;
+    config.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+    };
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ActiveUser", policy => policy.RequireClaim("IsActive", "True"));
+});
 
 builder.Services.AddCors(options =>
 {
@@ -130,7 +164,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseAuthentication();
+app.UseAuthentication();
 
 app.UseAuthorization();
 

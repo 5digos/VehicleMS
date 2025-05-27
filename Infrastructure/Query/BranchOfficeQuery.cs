@@ -19,6 +19,15 @@ namespace Infrastructure.Query
             _context = context;
         }
 
+        public async Task<BranchOffice> GetBranchOfficeById(int id)
+        {
+            var branchOffice = await _context.Set<BranchOffice>()
+                .Include(x => x.Zone)
+                .FirstOrDefaultAsync(v => v.BranchOfficeId == id);
+
+            return branchOffice;
+        }
+
         public async Task<IEnumerable<BranchOffice>> GetBranchOffices(string? name, int? zone, string? city, string? postalCode, string? province)
         {
             var query = _context.BranchOffices

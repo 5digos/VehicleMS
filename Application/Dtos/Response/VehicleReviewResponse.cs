@@ -12,7 +12,7 @@ namespace Application.Dtos.Response
         public Guid Id { get; set; }
         public Guid VehicleId { get; set; }        
         public int Rating { get; set; }
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
         public DateTime CreatedAt { get; set; }
 
         public static explicit operator VehicleReviewResponse(VehicleReview vehicleReview)

@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.Response;
 using Application.Interfaces.IServices.IVehicleStatusServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,7 @@ namespace VehicleMS.Controllers
         /// Retrieves a list of all vehicle statuses.
         /// </summary>
         /// <response code="200"> Success </response>
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(typeof(List<GenericResponse>), 200)]
         public async Task<IActionResult> GetAll()

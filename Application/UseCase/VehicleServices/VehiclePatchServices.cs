@@ -17,11 +17,14 @@ namespace Application.UseCase.VehicleServices
     {
         private readonly IVehicleQuery _vehicleQuery;
         private readonly IVehicleCommand _vehicleCommand;
+        private readonly IBranchOfficeQuery _branchOfficeQuery;
 
-        public VehiclePatchServices(IVehicleQuery vehicleQuery, IVehicleCommand vehicleCommand)
+        public VehiclePatchServices(IVehicleQuery vehicleQuery, IVehicleCommand vehicleCommand, IBranchOfficeQuery branchOfficeQuery)
         {
             _vehicleQuery = vehicleQuery;
             _vehicleCommand = vehicleCommand;
+            _branchOfficeQuery = branchOfficeQuery;
+
         }
 
         public async Task<VehicleReviewResponse> AddReview(Guid vehicleId, VehicleReviewRequest reviewRequest)
@@ -50,6 +53,27 @@ namespace Application.UseCase.VehicleServices
             {
                 throw new NotFoundException(ex.Message);
             }
+        }
+
+        public async Task UpdateBranchOffice(Guid vehicleId, int branchOfficeId)
+        {
+            var vehicle = await _vehicleQuery.GetVehicleById(vehicleId);
+            if (vehicle == null)
+            {
+                throw new NotFoundException("Vehicle not found");
+            }
+
+            var branchOffice = await _branchOfficeQuery.GetBranchOfficeById(branchOfficeId);
+
+            if (branchOffice == null)
+            {
+                throw new NotFoundException("Branch office not found");
+            }
+
+            vehicle.BranchOfficeId = branchOfficeId;
+            vehicle.BranchOffice = branchOffice;
+
+            await _vehicleCommand.UpdateBranchOffice(vehicle);
         }
     }
 }
