@@ -16,11 +16,17 @@ namespace VehicleMS.Controllers
     {
         private readonly IVehicleGetServices _vehicleGetService;
         private readonly IVehiclePatchServices _vehiclePatchService;
+        private readonly IVehicleReviewGetServices _reviewGetService;
 
-        public VehicleController(IVehicleGetServices vehicleGetService, IVehiclePatchServices vehiclePatchService)
+        public VehicleController(
+            IVehicleGetServices vehicleGetService,
+            IVehiclePatchServices vehiclePatchService,
+            IVehicleReviewGetServices reviewGetService)
         {
             _vehicleGetService = vehicleGetService;
             _vehiclePatchService = vehiclePatchService;
+            _reviewGetService = reviewGetService;
+
         }
 
         /// <summary>
@@ -55,7 +61,7 @@ namespace VehicleMS.Controllers
                 var result = await _vehicleGetService.GetVehicles(branchOffice, category, seatingCapacity, transmissionType, color, brand, maxPrice, offset, size);
 
                 Response.Headers.Add("offset", (offset ?? 0).ToString());
-                Response.Headers.Add("size", (size ?? 0).ToString());
+                Response.Headers.Add("size", (size ?? 100000).ToString());
                 Response.Headers.Add("totalCount", result.TotalCount.ToString());
 
                 return new JsonResult(result.Vehicles) { StatusCode = 200 };
@@ -121,7 +127,7 @@ namespace VehicleMS.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> UpdateBranchOffice([FromRoute] Guid id, [FromQuery] int branchOfficeId)
-        {         
+        {
 
             try
             {
@@ -131,6 +137,34 @@ namespace VehicleMS.Controllers
             catch (NotFoundException ex)
             {
                 return new JsonResult(new ApiError { Message = ex.Message }) { StatusCode = 404 };
+            }
+        }
+
+
+        /// <summary>
+        /// Retrieves reviews for a vehicle, optional Rating filter and pagination.
+        /// </summary>
+        [AllowAnonymous]
+        [HttpGet("{id}/reviews")]
+        [ProducesResponseType(typeof(List<VehicleReviewResponse>), 200)]
+        [ProducesResponseType(typeof(ApiError), 400)]
+        public async Task<IActionResult> GetReviews(
+            [FromRoute] Guid id,
+            [FromQuery] int? rating,
+            [FromQuery] int? offset,
+            [FromQuery] int? size)
+        {
+            try
+            {
+                var result = await _reviewGetService.GetReviews(id, rating, offset, size);
+                Response.Headers.Add("offset", (offset ?? 0).ToString());
+                Response.Headers.Add("size", (size ?? 100000).ToString());
+                Response.Headers.Add("totalCount", result.TotalCount.ToString());
+                return Ok(result.Reviews);
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Errors);
             }
         }
     }

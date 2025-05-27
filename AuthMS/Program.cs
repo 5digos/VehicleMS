@@ -65,6 +65,7 @@ builder.Services.AddScoped<ITransmissionTypeGetServices, TransmissionTypeGetServ
 builder.Services.AddScoped<IVehicleCategoryGetServices, VehicleCategoryGetServices>();
 builder.Services.AddScoped<IBranchOfficeZoneGetServices, BranchOfficeZoneGetServices>();
 builder.Services.AddScoped<IBranchOfficeGetServices, BranchOfficeGetServices>();
+builder.Services.AddScoped<IVehicleReviewGetServices, VehicleReviewGetServices>();
 
 
 //Validators
@@ -72,6 +73,8 @@ builder.Services.AddValidatorsFromAssembly(typeof(VehicleReviewRequestValidator)
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<GetVehiclesRequestValidator>();
 builder.Services.AddScoped<IValidatorHandler<GetVehiclesRequest>, ValidatorHandler<GetVehiclesRequest>>();
+builder.Services.AddValidatorsFromAssemblyContaining<GetVehicleReviewsRequestValidator>();
+builder.Services.AddScoped<IValidatorHandler<GetVehicleReviewsRequest>, ValidatorHandler<GetVehicleReviewsRequest>>();
 
 //CQRS
 builder.Services.AddScoped<IVehicleQuery, VehicleQuery>();
@@ -81,6 +84,7 @@ builder.Services.AddScoped<ITransmissionTypeQuery, TransmissionTypeQuery>();
 builder.Services.AddScoped<IVehicleCategoryQuery, VehicleCategoryQuery>();
 builder.Services.AddScoped<IBranchOfficeZoneQuery, BranchOfficeZoneQuery>();
 builder.Services.AddScoped<IBranchOfficeQuery, BranchOfficeQuery>();
+builder.Services.AddScoped<IReviewQuery, ReviewQuery>();
 
 
 //TokenConfiguration
