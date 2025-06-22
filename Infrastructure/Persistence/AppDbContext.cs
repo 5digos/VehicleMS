@@ -18,6 +18,7 @@ namespace Infrastructure.Persistence
         public DbSet<VehicleCategory> VehicleCategories { get; set; }
         public DbSet<TransmissionType> TransmissionTypes { get; set; }
         public DbSet<VehicleReview> VehicleReviews { get; set; }
+        public DbSet<VehicleDocument> VehicleDocuments { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

@@ -5706,22 +5706,59 @@ namespace Infrastructure.Persistence.Seeds
                     }
                 };
 
+                //context.Vehicles.AddRange(cars1);
+                //context.Vehicles.AddRange(cars2);
+                //context.Vehicles.AddRange(cars3);
+                //context.Vehicles.AddRange(cars4);
+                //context.Vehicles.AddRange(cars5);
+                //context.Vehicles.AddRange(cars6);
+                //context.Vehicles.AddRange(cars7);
+                //context.Vehicles.AddRange(cars8);
+                //context.Vehicles.AddRange(cars9);
+                //context.Vehicles.AddRange(cars10);
 
 
-                context.Vehicles.AddRange(cars1);
-                context.Vehicles.AddRange(cars2);
-                context.Vehicles.AddRange(cars3);
-                context.Vehicles.AddRange(cars4);
-                context.Vehicles.AddRange(cars5);
-                context.Vehicles.AddRange(cars6);
-                context.Vehicles.AddRange(cars7);
-                context.Vehicles.AddRange(cars8);
-                context.Vehicles.AddRange(cars9);
-                context.Vehicles.AddRange(cars10);
+                var allVehicles = new[] { cars1, cars2, cars3, cars4, cars5,
+                                  cars6, cars7, cars8, cars9, cars10 }
+                          .SelectMany(v => v)   // aplana las listas
+                          .ToList();
+
+                context.Vehicles.AddRange(allVehicles);   // << un solo AddRang
+
+                // ───────────────────────────────────────────────────────────────────────
+                // 4.  CREAR LOS DOCUMENTOS PARA CADA VEHÍCULO
+                //     (3 documentos por vehículo, mismos enlaces para todos)
+                // ───────────────────────────────────────────────────────────────────────
+                var now = DateTime.UtcNow;
+                var docTypes = new (string DocType, string Url)[]      // tabla “plantilla”
+                {
+                    ("cedulaVerde", "https://drive.google.com/file/d/11HeOKh-swIbranVHWvSJ1ImIM8ynNAR9/view"),
+                    ("vtv",         "https://drive.google.com/file/d/1vRVw_Fd3C1ScFAS0zp9C3sZVRHF0qW8R/view"),
+                    ("seguro",      "https://drive.google.com/file/d/1PjzQ9xl13xaEk_NYRP9G_at1ILpZSFxV/view")
+                };
+
+                var allDocs = allVehicles
+                    .SelectMany(v => docTypes.Select(t => new VehicleDocument
+                    {
+                        DocumentId = Guid.NewGuid(),
+                        VehicleId = v.VehicleId,   // FK resuelta en memoria
+                        DocType = t.DocType,
+                        Url = t.Url,
+                        UploadDate = now
+                    }))
+                    .ToList();
+
+                context.VehicleDocuments.AddRange(allDocs);
+
+                // ───────────────────────────────────────────────────────────────────────
+                // 5.  UN SOLO SaveChanges: EF Core guarda primero los vehículos
+                //     y luego los documentos respetando las FK.
+                // ───────────────────────────────────────────────────────────────────────
+                await context.SaveChangesAsync();
             }
 
-            // 2.4. Guardo todos los cambios
-            await context.SaveChangesAsync();
+            //// 2.4. Guardo todos los cambios
+            //await context.SaveChangesAsync();
         }
     }
 }
