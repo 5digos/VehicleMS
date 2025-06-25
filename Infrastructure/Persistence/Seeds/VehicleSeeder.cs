@@ -132,23 +132,7 @@ namespace Infrastructure.Persistence.Seeds
                         CategoryId = 3,
                         TransmissionTypeId = 2, 
                         Color = "Gris"
-                    },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Chevrolet",
-                        Model = "Camaro",
-                        LicensePlate = gen.Next(),
-                        Year = 2018,
-                        Price = 15000, 
-                        SeatingCapacity = 2,
-                        ImageUrl = "https://th.bing.com/th/id/R.11dc1a000bc3d490fb63f13dd558d2aa?rik=%2bno2eeWvhG8zRQ&pid=ImgRaw&r=0",
-                        VehicleStatusId = 1, 
-                        BranchOfficeId = 1, 
-                        CategoryId = 5,
-                        TransmissionTypeId = 1, 
-                        Color = "Amarillo"
-                    },
+                    },                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -552,22 +536,7 @@ namespace Infrastructure.Persistence.Seeds
                         TransmissionTypeId = 1, 
                         Color = "Gris"
                     },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Renault",
-                        Model = "Captur",
-                        LicensePlate = gen.Next(),
-                        Year = 2020,
-                        Price = 13000,
-                        SeatingCapacity = 5,
-                        ImageUrl = "https://media.fastestlaps.com/renault-captur-tce-160.jpg",
-                        VehicleStatusId = 1, 
-                        BranchOfficeId = 1, 
-                        CategoryId = 2,
-                        TransmissionTypeId = 1, 
-                        Color = "Rojo"
-                    },
+                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -701,23 +670,7 @@ namespace Infrastructure.Persistence.Seeds
                         CategoryId = 3,
                         TransmissionTypeId = 2,
                         Color = "Gris"
-                    },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Chevrolet",
-                        Model = "Camaro",
-                        LicensePlate = gen.Next(),
-                        Year = 2018,
-                        Price = 15000,
-                        SeatingCapacity = 2,
-                        ImageUrl = "https://th.bing.com/th/id/R.11dc1a000bc3d490fb63f13dd558d2aa?rik=%2bno2eeWvhG8zRQ&pid=ImgRaw&r=0",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 2,
-                        CategoryId = 5,
-                        TransmissionTypeId = 1,
-                        Color = "Amarillo"
-                    },
+                    },                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -1120,23 +1073,7 @@ namespace Infrastructure.Persistence.Seeds
                         CategoryId = 6,
                         TransmissionTypeId = 1,
                         Color = "Gris"
-                    },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Renault",
-                        Model = "Captur",
-                        LicensePlate = gen.Next(),
-                        Year = 2020,
-                        Price = 13000,
-                        SeatingCapacity = 5,
-                        ImageUrl = "https://media.fastestlaps.com/renault-captur-tce-160.jpg",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 2,
-                        CategoryId = 2,
-                        TransmissionTypeId = 1,
-                        Color = "Rojo"
-                    },
+                    },                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -1154,8 +1091,6 @@ namespace Infrastructure.Persistence.Seeds
                         Color = "Verde"
                     }
                 };
-
-
 
                 var cars3 = new List<Vehicle>
                 {
@@ -1270,23 +1205,7 @@ namespace Infrastructure.Persistence.Seeds
                         CategoryId = 3,
                         TransmissionTypeId = 2,
                         Color = "Gris"
-                    },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Chevrolet",
-                        Model = "Camaro",
-                        LicensePlate = gen.Next(),
-                        Year = 2018,
-                        Price = 15000,
-                        SeatingCapacity = 2,
-                        ImageUrl = "https://th.bing.com/th/id/R.11dc1a000bc3d490fb63f13dd558d2aa?rik=%2bno2eeWvhG8zRQ&pid=ImgRaw&r=0",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 3,
-                        CategoryId = 5,
-                        TransmissionTypeId = 1,
-                        Color = "Amarillo"
-                    },
+                    },                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -1690,22 +1609,7 @@ namespace Infrastructure.Persistence.Seeds
                         TransmissionTypeId = 1,
                         Color = "Gris"
                     },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Renault",
-                        Model = "Captur",
-                        LicensePlate = gen.Next(),
-                        Year = 2020,
-                        Price = 13000,
-                        SeatingCapacity = 5,
-                        ImageUrl = "https://media.fastestlaps.com/renault-captur-tce-160.jpg",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 3,
-                        CategoryId = 2,
-                        TransmissionTypeId = 1,
-                        Color = "Rojo"
-                    },
+                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -1839,23 +1743,7 @@ namespace Infrastructure.Persistence.Seeds
                         CategoryId = 3,
                         TransmissionTypeId = 2,
                         Color = "Gris"
-                    },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Chevrolet",
-                        Model = "Camaro",
-                        LicensePlate = gen.Next(),
-                        Year = 2018,
-                        Price = 15000,
-                        SeatingCapacity = 2,
-                        ImageUrl = "https://th.bing.com/th/id/R.11dc1a000bc3d490fb63f13dd558d2aa?rik=%2bno2eeWvhG8zRQ&pid=ImgRaw&r=0",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 4,
-                        CategoryId = 5,
-                        TransmissionTypeId = 1,
-                        Color = "Amarillo"
-                    },
+                    },                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -2259,22 +2147,7 @@ namespace Infrastructure.Persistence.Seeds
                         TransmissionTypeId = 1,
                         Color = "Gris"
                     },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Renault",
-                        Model = "Captur",
-                        LicensePlate = gen.Next(),
-                        Year = 2020,
-                        Price = 13000,
-                        SeatingCapacity = 5,
-                        ImageUrl = "https://media.fastestlaps.com/renault-captur-tce-160.jpg",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 4,
-                        CategoryId = 2,
-                        TransmissionTypeId = 1,
-                        Color = "Rojo"
-                    },
+                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -2408,23 +2281,7 @@ namespace Infrastructure.Persistence.Seeds
                         CategoryId = 3,
                         TransmissionTypeId = 2,
                         Color = "Gris"
-                    },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Chevrolet",
-                        Model = "Camaro",
-                        LicensePlate = gen.Next(),
-                        Year = 2018,
-                        Price = 15000,
-                        SeatingCapacity = 2,
-                        ImageUrl = "https://th.bing.com/th/id/R.11dc1a000bc3d490fb63f13dd558d2aa?rik=%2bno2eeWvhG8zRQ&pid=ImgRaw&r=0",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 5,
-                        CategoryId = 5,
-                        TransmissionTypeId = 1,
-                        Color = "Amarillo"
-                    },
+                    },                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -2828,22 +2685,7 @@ namespace Infrastructure.Persistence.Seeds
                         TransmissionTypeId = 1,
                         Color = "Gris"
                     },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Renault",
-                        Model = "Captur",
-                        LicensePlate = gen.Next(),
-                        Year = 2020,
-                        Price = 13000,
-                        SeatingCapacity = 5,
-                        ImageUrl = "https://media.fastestlaps.com/renault-captur-tce-160.jpg",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 5,
-                        CategoryId = 2,
-                        TransmissionTypeId = 1,
-                        Color = "Rojo"
-                    },
+                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -2977,23 +2819,7 @@ namespace Infrastructure.Persistence.Seeds
                         CategoryId = 3,
                         TransmissionTypeId = 2,
                         Color = "Gris"
-                    },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Chevrolet",
-                        Model = "Camaro",
-                        LicensePlate = gen.Next(),
-                        Year = 2018,
-                        Price = 15000,
-                        SeatingCapacity = 2,
-                        ImageUrl = "https://th.bing.com/th/id/R.11dc1a000bc3d490fb63f13dd558d2aa?rik=%2bno2eeWvhG8zRQ&pid=ImgRaw&r=0",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 6,
-                        CategoryId = 5,
-                        TransmissionTypeId = 1,
-                        Color = "Amarillo"
-                    },
+                    },                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -3397,22 +3223,7 @@ namespace Infrastructure.Persistence.Seeds
                         TransmissionTypeId = 1,
                         Color = "Gris"
                     },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Renault",
-                        Model = "Captur",
-                        LicensePlate = gen.Next(),
-                        Year = 2020,
-                        Price = 13000,
-                        SeatingCapacity = 5,
-                        ImageUrl = "https://media.fastestlaps.com/renault-captur-tce-160.jpg",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 6,
-                        CategoryId = 2,
-                        TransmissionTypeId = 1,
-                        Color = "Rojo"
-                    },
+                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -3545,23 +3356,7 @@ namespace Infrastructure.Persistence.Seeds
                         CategoryId = 3,
                         TransmissionTypeId = 2,
                         Color = "Gris"
-                    },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Chevrolet",
-                        Model = "Camaro",
-                        LicensePlate = gen.Next(),
-                        Year = 2018,
-                        Price = 15000,
-                        SeatingCapacity = 2,
-                        ImageUrl = "https://th.bing.com/th/id/R.11dc1a000bc3d490fb63f13dd558d2aa?rik=%2bno2eeWvhG8zRQ&pid=ImgRaw&r=0",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 7,
-                        CategoryId = 5,
-                        TransmissionTypeId = 1,
-                        Color = "Amarillo"
-                    },
+                    },                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -3723,22 +3518,7 @@ namespace Infrastructure.Persistence.Seeds
                         TransmissionTypeId = 2,
                         Color = "Gris"
                     },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Mercedes Benz",
-                        Model = "Cle",
-                        LicensePlate = gen.Next(),
-                        Year = 2024,
-                        Price = 22000,
-                        SeatingCapacity = 4,
-                        ImageUrl = "https://www.slashgear.com/img/gallery/2024-mercedes-benz-cle-class-first-drive-when-one-coupe-is-better-than-two/intro-1694186938.jpg",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 7,
-                        CategoryId = 6,
-                        TransmissionTypeId = 1,
-                        Color = "Rojo"
-                    },
+                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -3965,22 +3745,7 @@ namespace Infrastructure.Persistence.Seeds
                         TransmissionTypeId = 1,
                         Color = "Gris"
                     },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Renault",
-                        Model = "Captur",
-                        LicensePlate = gen.Next(),
-                        Year = 2020,
-                        Price = 13000,
-                        SeatingCapacity = 5,
-                        ImageUrl = "https://media.fastestlaps.com/renault-captur-tce-160.jpg",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 7,
-                        CategoryId = 2,
-                        TransmissionTypeId = 1,
-                        Color = "Rojo"
-                    },
+                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -4114,23 +3879,7 @@ namespace Infrastructure.Persistence.Seeds
                         CategoryId = 3,
                         TransmissionTypeId = 2,
                         Color = "Gris"
-                    },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Chevrolet",
-                        Model = "Camaro",
-                        LicensePlate = gen.Next(),
-                        Year = 2018,
-                        Price = 15000,
-                        SeatingCapacity = 2,
-                        ImageUrl = "https://th.bing.com/th/id/R.11dc1a000bc3d490fb63f13dd558d2aa?rik=%2bno2eeWvhG8zRQ&pid=ImgRaw&r=0",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 8,
-                        CategoryId = 5,
-                        TransmissionTypeId = 1,
-                        Color = "Amarillo"
-                    },
+                    },                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -4534,22 +4283,7 @@ namespace Infrastructure.Persistence.Seeds
                         TransmissionTypeId = 1,
                         Color = "Gris"
                     },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Renault",
-                        Model = "Captur",
-                        LicensePlate = gen.Next(),
-                        Year = 2020,
-                        Price = 13000,
-                        SeatingCapacity = 5,
-                        ImageUrl = "https://media.fastestlaps.com/renault-captur-tce-160.jpg",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 8,
-                        CategoryId = 2,
-                        TransmissionTypeId = 1,
-                        Color = "Rojo"
-                    },
+                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -4683,23 +4417,7 @@ namespace Infrastructure.Persistence.Seeds
                         CategoryId = 3,
                         TransmissionTypeId = 2,
                         Color = "Gris"
-                    },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Chevrolet",
-                        Model = "Camaro",
-                        LicensePlate = gen.Next(),
-                        Year = 2018,
-                        Price = 15000,
-                        SeatingCapacity = 2,
-                        ImageUrl = "https://th.bing.com/th/id/R.11dc1a000bc3d490fb63f13dd558d2aa?rik=%2bno2eeWvhG8zRQ&pid=ImgRaw&r=0",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 9,
-                        CategoryId = 5,
-                        TransmissionTypeId = 1,
-                        Color = "Amarillo"
-                    },
+                    },                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -5103,22 +4821,7 @@ namespace Infrastructure.Persistence.Seeds
                         TransmissionTypeId = 1,
                         Color = "Gris"
                     },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Renault",
-                        Model = "Captur",
-                        LicensePlate = gen.Next(),
-                        Year = 2020,
-                        Price = 13000,
-                        SeatingCapacity = 5,
-                        ImageUrl = "https://media.fastestlaps.com/renault-captur-tce-160.jpg",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 9,
-                        CategoryId = 2,
-                        TransmissionTypeId = 1,
-                        Color = "Rojo"
-                    },
+                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -5252,23 +4955,7 @@ namespace Infrastructure.Persistence.Seeds
                         CategoryId = 3,
                         TransmissionTypeId = 2,
                         Color = "Gris"
-                    },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Chevrolet",
-                        Model = "Camaro",
-                        LicensePlate = gen.Next(),
-                        Year = 2018,
-                        Price = 15000,
-                        SeatingCapacity = 2,
-                        ImageUrl = "https://th.bing.com/th/id/R.11dc1a000bc3d490fb63f13dd558d2aa?rik=%2bno2eeWvhG8zRQ&pid=ImgRaw&r=0",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 10,
-                        CategoryId = 5,
-                        TransmissionTypeId = 1,
-                        Color = "Amarillo"
-                    },
+                    },                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -5672,22 +5359,7 @@ namespace Infrastructure.Persistence.Seeds
                         TransmissionTypeId = 1,
                         Color = "Gris"
                     },
-                    new Vehicle
-                    {
-                        VehicleId = Guid.NewGuid(),
-                        Brand = "Renault",
-                        Model = "Captur",
-                        LicensePlate = gen.Next(),
-                        Year = 2020,
-                        Price = 13000,
-                        SeatingCapacity = 5,
-                        ImageUrl = "https://media.fastestlaps.com/renault-captur-tce-160.jpg",
-                        VehicleStatusId = 1,
-                        BranchOfficeId = 10,
-                        CategoryId = 2,
-                        TransmissionTypeId = 1,
-                        Color = "Rojo"
-                    },
+                    
                     new Vehicle
                     {
                         VehicleId = Guid.NewGuid(),
@@ -5704,18 +5376,7 @@ namespace Infrastructure.Persistence.Seeds
                         TransmissionTypeId = 2,
                         Color = "Verde"
                     }
-                };
-
-                //context.Vehicles.AddRange(cars1);
-                //context.Vehicles.AddRange(cars2);
-                //context.Vehicles.AddRange(cars3);
-                //context.Vehicles.AddRange(cars4);
-                //context.Vehicles.AddRange(cars5);
-                //context.Vehicles.AddRange(cars6);
-                //context.Vehicles.AddRange(cars7);
-                //context.Vehicles.AddRange(cars8);
-                //context.Vehicles.AddRange(cars9);
-                //context.Vehicles.AddRange(cars10);
+                };               
 
 
                 var allVehicles = new[] { cars1, cars2, cars3, cars4, cars5,
@@ -5756,9 +5417,7 @@ namespace Infrastructure.Persistence.Seeds
                 // ───────────────────────────────────────────────────────────────────────
                 await context.SaveChangesAsync();
             }
-
-            //// 2.4. Guardo todos los cambios
-            //await context.SaveChangesAsync();
+            
         }
     }
 }
